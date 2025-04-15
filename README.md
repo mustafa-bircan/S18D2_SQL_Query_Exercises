@@ -20,8 +20,55 @@ This project contains exercises and examples related to SQL DML (Data Manipulati
 
 4. **Functions and Procedures:**
     - **ogrencilistesi()**: Function to return a list of students.
+      CREATE OR REPLACE FUNCTION ogrencilistesi()
+RETURNS TABLE(
+    ogrno BIGINT, 
+    ad CHARACTER VARYING(45), 
+    soyad CHARACTER VARYING(45), 
+    cinsiyet CHARACTER VARYING(1), 
+    sinif CHARACTER VARYING(3), 
+    puan INT, 
+    dtarih CHARACTER VARYING(20)
+)
+AS
+$$
+BEGIN
+    RETURN QUERY
+    SELECT ogrenci.ogrno, ogrenci.ad, ogrenci.soyad, ogrenci.cinsiyet, ogrenci.sinif, ogrenci.puan, ogrenci.dtarih
+    FROM ogrenci;
+END;
+$$ LANGUAGE plpgsql;
+
+
     - **ekle()**: Procedure to add a new book.
+      CREATE OR REPLACE PROCEDURE ekle(
+    p_ad CHARACTER VARYING(45),
+    p_puan INTEGER,
+    p_yazarno BIGINT,
+    p_turno BIGINT
+)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    INSERT INTO public.kitap (ad, puan, yazarno, turno)
+    VALUES (p_ad, p_puan, p_yazarno, p_turno);
+END;
+$$;
+      
     - **sil()**: Procedure to delete a student.
+      CREATE OR REPLACE PROCEDURE sil(
+    p_ogrno BIGINT
+)
+LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    DELETE FROM ogrenci
+    WHERE ogrno = p_ogrno;
+END;
+$$;
+
 
 ## Usage
 
