@@ -10,6 +10,7 @@ import com.workintech.sqldmlprocedures.repository.TurRepository;
 import com.workintech.sqldmlprocedures.repository.YazarRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -95,6 +96,7 @@ class SqlDmlProceduresApplicationTests {
 	@Test
 	void callOgrenciListesiTest(){
 		List<Ogrenci> ogrenciList = ogrenciRepository.findAllOgrenci();
+		System.out.println("Toplam gelen öğrenci sayısı: " + ogrenciList.size());
 		assertNotNull(ogrenciList);
 		assertEquals(ogrenciList.size(), 10);
 	}
